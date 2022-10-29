@@ -20,10 +20,8 @@
     <tbody>
     <tr th:each="user : ${allUsers}">
         <td th:text="${user.getId()}">
-        <td th:text="${user.getName()}">
-        <td th:text="${user.getSurname()}">
-        <td th:text="${user.getDepartment()}">
-        <td th:text="${user.getSalary()}">
+        <td th:text="${user.getUsername()}">
+        <td th:text="${user.getRoles()}">
     </tr>
     </tbody>
 </table>
