@@ -1,34 +1,33 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Create User</title>
 </head>
 <body>
+<form th:action="@{/admin/create}" th:object="${user}" method="post">
+    <label for="id">ID</label>
+    <input readonly type="number" th:field="*{id}" id="id" placeholder="ID">
+    <br>
+    <br>
+    <label for="username">Username</label>
+    <input type="text" th:field="*{username}" id="username" placeholder="Username">
+    <br>
+    <br>
+    <label for="password">Password</label>
+    <input type="text" th:field="*{password}" id="password" placeholder="password">
+    <br>
+    <br>
+    <label for="age">Age</label>
+    <input type="text" th:field="*{age}" id="age" placeholder="Age">
+    <br>
+    <br>
+    <label for="email">E-mail</label>
+    <input type="text" th:field="*{email}" id="email" placeholder="email">
+    <br>
 
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Name</th>
-        <th scope="col">Surname</th>
-        <th scope="col">Department</th>
-        <th scope="col">Salary</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="user : ${allUsers}">
-        <td th:text="${user.getId()}">
-        <td th:text="${user.getUsername()}">
-        <td th:text="${user.getRoles()}">
-    </tr>
-    </tbody>
-</table>
+    <input type="submit" value="Update">
 
-<br/>
-<hr/>
-<a href="/spring_mvc_war_exploded/users/new">Create New Person</a>
-
+</form>
 </body>
 </html>
