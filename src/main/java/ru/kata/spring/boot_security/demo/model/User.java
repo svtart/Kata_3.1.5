@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -37,12 +38,12 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private Set<Role> roles = new HashSet<>();
+    private Set <Role> roles;
 
     public User() {
     }
 
-    public User(Long id, String username, String password, String email, int age, Set<Role> roles) {
+    public User(Long id, String username, String password, String email, int age, Set <Role> roles) {
         this.id = id;
         this.username = username;
         this.password = password;
