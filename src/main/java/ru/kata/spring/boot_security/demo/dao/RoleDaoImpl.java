@@ -25,6 +25,11 @@ public class RoleDaoImpl implements  RoleDao{
                 .setParameter("name", name).getSingleResult();
     }
 
+    @Override
+    public Role getRoleById(Long id) {
+        return entityManager.find(Role.class, id);
+    }
+
 
     @Override
     public Set<Role> getAllRoles() {
