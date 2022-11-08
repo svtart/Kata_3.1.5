@@ -11,7 +11,6 @@ public interface RoleService {
     Role getRoleById(Long id);
 
 
-
     Role getRoleByName(String name);
 
     public Set<Role> getRolesByName(Set<Role> roles);
