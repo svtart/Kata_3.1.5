@@ -62,4 +62,5 @@ public class AdminController {
         model.addAttribute("user", userService.findUserById(id));
         return "admin";
     }
+
 }
