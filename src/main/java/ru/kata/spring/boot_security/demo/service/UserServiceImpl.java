@@ -2,6 +2,7 @@ package ru.kata.spring.boot_security.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.repository.cdi.Eager;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class UserServiceImpl implements UserService {
     private final RoleDao roleDao;
 
 
-    final PasswordEncoder encoder;
+    private final PasswordEncoder encoder;
 
 
     @Autowired
@@ -35,31 +36,30 @@ public class UserServiceImpl implements UserService {
     public void addUser(User user) {
         user.setPassword(encoder.encode(user.getPassword()));
         user.setRoles(Collections.singleton(roleDao.getRoleByName("ROLE_USER")));
-        this.userDao.addUser(user);
+        userDao.addUser(user);
     }
 
     @Override
     @Transactional
     public void updateUser(User user) {
-        user.setPassword(encoder.encode(user.getPassword()));
         user.setRoles(roleDao.getRolesByName(user.getRoles()));
-        this.userDao.updateUser(user);
+        userDao.updateUser(user);
     }
 
     @Override
     @Transactional
     public void removeUser(Long id) {
-        this.userDao.removeUser(id);
+        userDao.removeUser(id);
     }
 
     @Override
     public User findUserById(Long id) {
-        return this.userDao.findUserById(id);
+        return userDao.findUserById(id);
     }
 
     @Override
     public List<User> getListUsers() {
-        return this.userDao.getListUsers();
+        return userDao.getListUsers();
     }
 
     @Override
