@@ -5,41 +5,43 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.dao.RoleDao;
 import ru.kata.spring.boot_security.demo.model.Role;
+import ru.kata.spring.boot_security.demo.repository.RoleRepository;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Service
 public class RoleServiceImpl implements RoleService {
-    private final RoleDao roleDao;
+    private final RoleRepository roleRepository;
+
     @Autowired
-    public RoleServiceImpl(RoleDao roleDao) {
-        this.roleDao = roleDao;
+    public RoleServiceImpl(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
     }
 
 
     @Override
     public void addRole(Role role) {
-        roleDao.addRole(role);
-    }
-
-    @Override
-    public Role getRoleById(Long id) {
-        return roleDao.getRoleById(id);
+        roleRepository.save(role);
     }
 
 
     @Override
     public Role getRoleByName(String name) {
-        return roleDao.getRoleByName(name);
+        return roleRepository.findByRolename(name);
     }
 
     @Override
     public Set<Role> getRolesByName(Set<Role> roles) {
-        return roleDao.getRolesByName(roles);
+        Set<Role> userRoles = new HashSet<>();
+        for (Role role : roles) {
+            userRoles.add(getRoleByName(role.getRolename()));
+        }
+        return userRoles;
     }
 
     @Override
     public Set<Role> getAllRoles() {
-        return roleDao.getAllRoles();
+        return new HashSet<>(roleRepository.findAll());
     }
 }

@@ -13,6 +13,9 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 @Component
+@NamedEntityGraph(name = "User.roles",
+        attributeNodes = @NamedAttributeNode("roles")
+)
 public class User implements UserDetails {
 
     @Id
