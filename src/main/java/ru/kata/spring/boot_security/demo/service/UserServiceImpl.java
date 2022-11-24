@@ -8,13 +8,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.kata.spring.boot_security.demo.dao.RoleDao;
 import ru.kata.spring.boot_security.demo.dao.UserDao;
+import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.repository.RoleRepository;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
+import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -23,6 +24,7 @@ public class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
 
     private final PasswordEncoder encoder;
+
 
 
     @Autowired
@@ -62,9 +64,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) {
         User user = userRepository.findUserByUsername(username);
         return user;
     }
+
 
 }

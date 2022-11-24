@@ -34,7 +34,7 @@ public class User implements UserDetails {
     @Column(name = "age")
     private int age;
 
-    @ManyToMany
+    @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
@@ -45,8 +45,7 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(Long id, String username, String password, String email, int age, Set <Role> roles) {
-        this.id = id;
+    public User(String username, String password, String email, int age, Set <Role> roles) {
         this.username = username;
         this.password = password;
         this.email = email;

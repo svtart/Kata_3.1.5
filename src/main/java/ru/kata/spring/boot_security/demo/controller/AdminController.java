@@ -41,7 +41,7 @@ public class AdminController {
         return "admin";
     }
 
-    @PostMapping("/admin/create")
+    @RequestMapping(value = "/admin/create", method = {RequestMethod.GET, RequestMethod.PUT, RequestMethod.POST})
     public String createUser(@ModelAttribute("user") User user, @RequestParam(value = "newRoles") String[] roles) {
         user.setRoles(getRoles(roles));
         userService.addUser(user);
@@ -52,10 +52,10 @@ public class AdminController {
     public String updateUser(@ModelAttribute("user") User user, @RequestParam(value = "rolesEdit") String[] rolesEdit) {
         user.setRoles(getRoles(rolesEdit));
         userService.updateUser(user);
-        return "redirect:/admin/";
+        return "redirect:/admin";
     }
 
-    @DeleteMapping("/admin/delete/{id}")
+    @RequestMapping(value = "/admin/delete/{id}", method = {RequestMethod.GET, RequestMethod.DELETE, RequestMethod.PUT} )
     public String deleteUser(@PathVariable("id") Long id, Model model) {
         model.addAttribute("user", userService.findUserById(id));
         userService.removeUser(id);
