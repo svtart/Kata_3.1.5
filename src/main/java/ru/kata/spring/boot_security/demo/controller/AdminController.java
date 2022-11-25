@@ -49,8 +49,8 @@ public class AdminController {
     }
 
     @PutMapping("/admin/{id}")
-    public String updateUser(@ModelAttribute("user") User user, @RequestParam(value = "rolesEdit") String[] rolesEdit) {
-        user.setRoles(getRoles(rolesEdit));
+    public String updateUser(@ModelAttribute("user") User user, @RequestParam(value = "rolesEdit", required = false) String[] rolesEdit) {
+//        user.setRoles(getRoles(rolesEdit));
         userService.updateUser(user);
         return "redirect:/admin";
     }
@@ -65,7 +65,7 @@ public class AdminController {
     public Set<Role> getRoles(String[] roles){
         Set<Role> userRole = new HashSet<>();
         for (String role : roles){
-            String auth = "ROLE_" + role;
+            String auth = role;
             userRole.add(roleService.getRoleByName(auth));
         }
         return userRole;
