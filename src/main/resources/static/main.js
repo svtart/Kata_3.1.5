@@ -83,7 +83,7 @@ function addNewUser() {
     let age = document.getElementById('createAge').value;
     let email = document.getElementById('createEmail').value;
     let roles = getRoles(document.getElementById('createRoles'));
-    return fetch("http://localhost:8080/api/createUser/", {
+    fetch("http://localhost:8080/api/createUser", {
         method: "POST",
         headers: {
             'Accept': 'application/json',
@@ -106,24 +106,12 @@ function addNewUser() {
 
 async function deleteUser() {
     event.preventDefault()
-    let username = document.getElementById('createUsername').value;
-    let password = document.getElementById('createPassword').value;
-    let age = document.getElementById('createAge').value;
-    let email = document.getElementById('createEmail').value;
-    let roles = getRoles(document.getElementById('createRoles'));
     await fetch("http://localhost:8080/api/delete/" + document.getElementById("idDelete").value, {
         method: 'DELETE',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json;charset=UTF-8'
         },
-        body: JSON.stringify({
-            username: username,
-            password: password,
-            age: age,
-            email: email,
-            roles: roles
-        })
     })
 
     $("#modalDelete .close").click();

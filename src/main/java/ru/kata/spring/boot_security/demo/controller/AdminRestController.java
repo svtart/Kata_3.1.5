@@ -4,11 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api")
@@ -39,7 +42,9 @@ public class AdminRestController {
 
     @PostMapping("/createUser")
     public ResponseEntity<User> createUser(@RequestBody User user) {
-        System.out.println(user);
+        Set<Role> roles = new HashSet<>();
+        roles.add(new Role("ROLE_USER"));
+        user.setRoles(roles);
         userService.addUser(user);
         return ResponseEntity.ok().build();
     }
