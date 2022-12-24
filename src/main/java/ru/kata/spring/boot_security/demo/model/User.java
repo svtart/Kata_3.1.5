@@ -135,8 +135,11 @@ public class User implements UserDetails {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", city='" + age + '\'' +
                 ", email='" + email + '\'' +
-                ", age=" + age +
+                ", roles=" + getRoles() +
                 '}';
     }
+
 }

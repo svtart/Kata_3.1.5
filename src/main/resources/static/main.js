@@ -11,7 +11,7 @@ function getAllUsers() {
                 <td id="username${user.id}">${user.username}</td> 
                 <td id="surname${user.id}">${user.age}</td> 
                 <td id="age${user.id}">${user.email}</td>
-                <td id="roles${user.id}">${user.roles.map(r => r.rolename.replace("ROLE_", ""))}</td>
+                <td id="roles${user.id}">${user.roles.map(r => r.rolename)}</td>
                 <td>
                 <button class="btn btn-info btn-md" type="button"
                 data-toggle="modal" data-target="#modalEdit" 
@@ -118,19 +118,42 @@ async function deleteUser() {
     refreshTable();
 }
 
+
+// function getRoles(list) {
+//     let userRoles = [];
+//     for (let role of list) {
+//         if (role == 2 || role.id == 2) {
+//             userRoles.push("ROLE_ADMIN");
+//         }
+//         if (role == 1 || role.id == 1) {
+//             userRoles.push("ROLE_USER");
+//         }
+//     }
+//     return userRoles.join(" , ");
+// }
+
+// function getRoles(rols) {
+//     let roles = [];
+//     if (rols.indexOf("ADMIN") >= 0) {
+//         roles.push({"id": 1});
+//     }
+//     if (rols.indexOf("USER") >= 0) {
+//         roles.push({"id": 2});
+//     }
+//     return roles;
+// }
+
 function getRoles(selector) {
     let collection = selector.selectedOptions
     let roles = []
     for (let i = 0; i < collection.length; i++) {
         if (collection[i].value === '1') {
             roles.push({
-                id: 1,
-                name: 'ROLE_ADMIN'
+                rolename: 'ROLE_ADMIN'
             })
         } else if (collection[i].value === '2') {
             roles.push({
-                id: 2,
-                name: 'ROLE_USER'
+                rolename: 'ROLE_USER'
             })
         }
     }
