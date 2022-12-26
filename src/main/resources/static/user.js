@@ -4,14 +4,14 @@ const url = 'http://localhost:8080/api/user';
 function userInfo() {
     fetch(url)
         .then((res) => res.json())
-        .then((u) => {
+        .then((user) => {
             let temp = '';
             temp += `<tr>
-            <td>${u.id}</td>
-            <td>${u.username}</td>
-            <td>${u.age}</td>
-            <td>${u.email}</td>
-            <td>${u.role}</td>
+            <td>${user.id}</td>
+            <td>${user.username}</td>
+            <td>${user.age}</td>
+            <td>${user.email}</td>
+            <td>${user.roles.map(r => r.rolename)}</td>
             </tr>`;
             data.innerHTML = temp;
         });
