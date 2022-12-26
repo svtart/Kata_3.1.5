@@ -42,11 +42,6 @@ public class AdminRestController {
 
     @PostMapping("/createUser")
     public ResponseEntity<User> createUser(@RequestBody User user) {
-//        Set<Role> roles = new HashSet<>();
-//        roles.add(new Role(user.getRoles().toString()));
-//        roles.add(new Role("ROLE_ADMIN"));
-//        roleService.getRoleByName();
-//        user.setRoles(roles);
         userService.addUser(user);
         return ResponseEntity.ok().build();
     }
