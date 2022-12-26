@@ -1,21 +1,20 @@
-function getOneUser() {
-    fetch("http://localhost:8080/api/user")
-        .then(res => res.json())
-        .then(user => {
-            let temp = '';
-            console.log(user);
+const data = document.getElementById("dataUserTable");
+const url = 'http://localhost:8080/api/user';
 
-                temp += `
-                <tr>
-                <td>${user.id}</td>
-                <td>${user.username}</td> 
-                <td>${user.age}</td> 
-                <td>${user.email}</td>
-                <td>${user.roles.map(r => r.rolename)}</td>
-                <td>
-                
-              </tr>`;
-            document.getElementById("dataUserTable").innerHTML = temp;
+function userInfo() {
+    fetch(url)
+        .then((res) => res.json())
+        .then((u) => {
+            let temp = '';
+            temp += `<tr>
+            <td>${u.id}</td>
+            <td>${u.username}</td>
+            <td>${u.age}</td>
+            <td>${u.email}</td>
+            <td>${u.role}</td>
+            </tr>`;
+            data.innerHTML = temp;
         });
 }
-getOneUser()
+
+userInfo()
