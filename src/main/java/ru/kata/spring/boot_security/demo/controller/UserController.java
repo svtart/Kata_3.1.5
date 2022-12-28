@@ -19,10 +19,23 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/user")
-    public String getUser(Model model, Principal principal) {
-        User user = (User) userService.loadUserByUsername(principal.getName());
-        model.addAttribute("user", user);
-        return "/user";
+//    @GetMapping("/user")
+//    public String getUser(Model model, Principal principal) {
+//        User user = (User) userService.loadUserByUsername(principal.getName());
+//        model.addAttribute("user", user);
+//        return "/user";
+//    }
+
+//    @GetMapping("/user/{id}")
+//    public String getUser(@PathVariable long id, Model model) {
+//        model.addAttribute("user", userService.findUserById(id));
+//        return "user";
+//    }
+
+    @GetMapping("/user/{userId}")
+    public String getUser(Model model, @PathVariable Long userId) {
+        model.addAttribute("user", userService.findUserById(userId));
+        return "user";
     }
+
 }

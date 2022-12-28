@@ -42,7 +42,7 @@
                         <a class="nav-link active mt-3 w-100" th:href="@{/admin}">Admin</a>
                     </li>
                     <li class="nav-item w-100">
-                        <a class="nav-link w-100" th:href="@{/user}">User</a>
+                        <a class="nav-link w-100" th:href="${'/user/'+currentUser.getId()}">User</a>
                     </li>
                 </ul>
             </div>
